@@ -25,7 +25,7 @@ void bubble_sort(int *array, size_t size)
 				print_array(array, size);
 			}
 		}
-		if (array[i] == array[i + 1])
+		if (array[j] == array[j + 1])
 			break;
 	}
 	printf("\n");
