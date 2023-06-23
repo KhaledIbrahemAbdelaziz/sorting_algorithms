@@ -31,6 +31,7 @@ void selection_sort(int *array, size_t size)
 
 		if (first_element != i)
 		{
+			/* temp var to store first_element */
 			temp = array[first_element];
 			array[first_element] = array[i];
 			array[i] = temp;
