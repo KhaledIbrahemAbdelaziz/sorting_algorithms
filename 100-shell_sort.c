@@ -11,26 +11,32 @@
  *
  * Return: void
  */
-
 void shell_sort(int *array, size_t size)
 {
-	int temp;
 	size_t i, j, gap;
+	int temp;
 
 	if (array == NULL || size < 2)
 		return;
 
-	for (gap = size / 2; gap > 0; gap /= 2)
+	gap = 1;
+	while (gap < size / 3)
+		gap = (gap * 3) + 1;
+
+	while (gap > 0)
 	{
-		for (i = gap; i < size; i += 1)
+		for (i = gap; i < size; i++)
 		{
 			temp = array[i];
-			for (j = i; j >= gap &&
-					array[j - gap] > temp; j -= gap)
+			j = i;
+			while (j > gap - 1 && array[j - gap] >= temp)
+			{
 				array[j] = array[j - gap];
-
+				j = j - gap;
+			}
 			array[j] = temp;
 		}
+		gap = (gap - 1) / 3;
 		print_array(array, size);
 	}
 }
