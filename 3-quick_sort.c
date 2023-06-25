@@ -1,11 +1,11 @@
 #include "sort.h"
+/* header */
 
-void swap_elements(int *a, int *b);
-int lomute_partition(int arr[], int first, int end);
-void sort_quick(int arr[], int first, int end);
 
 /**
- * swap_elements - swaps elements
+ * lomuto_swap - a function that swaps element of array
+ *
+ * @array: array containing elements to be swapped
  *
  * @a: first element
  *
@@ -13,74 +13,103 @@ void sort_quick(int arr[], int first, int end);
  *
  * Return: void
  */
-
-void swap_elements(int *a, int *b)
+void lomuto_swap(int array[], int a, int b)
 {
-	int t;
+	int temp;
 
-	t = *a;
-	*a = *b;
-	*b = t;
+	temp = array[a];
+	array[a] = array[b];
+	array[b] = temp;
 }
 
 
 /**
- * lomute_partition - partition the array using the last element as the pivot
+ * lomuto_partition - an implementation of the lomuto swap
  *
- * @first: first element
+ * @array: (int) array containing integer elements
  *
- * @end: last element
+ * @first: (int) points to first element in the array
+ *
+ * @end: (int) points to last element in the array
+ *
+ * Return: first element (i)
+ */
+
+int lomuto_partition(int array[], int first, int end)
+{
+	int pivot, i, j;
+	static int size, temp;
+
+	i = first;
+	pivot = array[end];
+
+	if (temp == 0)
+	{
+		size = end + 1;
+		temp++;
+	}
+
+	for (j = first; j < end; j++)
+	{
+		if (array[j] <= pivot)
+		{
+			if (i != j)
+			{
+				lomuto_swap(array, i, j);
+				print_array(array, size);
+			}
+			i++;
+		}
+	}
+
+	if (i != end)
+	{
+		lomuto_swap(array, i, end);
+		print_array(array, size);
+	}
+	return (i);
+}
+
+
+/**
+ * lomuto_sort - sorts elements in the array
+ *
+ * @array: array to be sorted
+ *
+ * @first: points to first element in the array
+ *
+ * @end: points to last element in the array
  *
  * Return: void
  */
 
-int lomute_partition(int arr[], int first, int end)
-{
-	int pivot = arr[end];
-	int i = (first - 1), j;
-
-	for (j = first; j <= end - 1; j++)
-	{
-		if (arr[j] < pivot)
-		{
-			i++;
-			swap_elements(&arr[i], &arr[j]);
-		}
-	}
-	swap_elements(&arr[i + 1], &arr[end]);
-	return (i + 1);
-}
-
-/**
- * quick_sort - sorts an array of integers
- * in ascending order using the Quick sort algorithm.
- * @array: The array of integers.
- * @size: the size of the array.
- * Return: nothing.
- */
-void quick_sort(int *array, size_t size)
-{
-	sort_quick(array, 0, size - 1);
-}
-
-
-/**
- * sort_lomute - sorting by lomute.
- * @a: the array.
- * @size: the size.
- * @low: the address of the beginning.
- * @high: the address of the ending.
- * Return: nothing.
- */
-void sort_quick(int arr[], int first, int end)
+void lomuto_sort(int array[], int first, int end)
 {
 	int pi;
 
 	if (first < end)
 	{
-		pi = lomute_partition(arr, first, end);
-		print_array(arr, end + 1);
-		sort_quick(arr, first, pi - 1);
-		sort_quick(arr, pi + 1, end);
+		pi = lomuto_partition(array, first, end);
+		lomuto_sort(array, first, pi - 1);
+		lomuto_sort(array, pi + 1, end);
 	}
+}
+
+
+/**
+ * quick_sort - main entry
+ *
+ * @array: array containing integer elements
+ *
+ * @size: size of array
+ *
+ * Return: void
+ */
+
+void quick_sort(int *array, size_t size)
+{
+	if (array == NULL || size < 2)
+		return;
+
+	lomuto_sort(array, 0, size - 1);
 }
