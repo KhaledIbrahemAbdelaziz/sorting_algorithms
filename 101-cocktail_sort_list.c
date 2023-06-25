@@ -2,7 +2,7 @@
 #include <stdbool.h>
 /* header */
 
-void swap_nodes(listint_t *node_one, listint_t *node_two);
+void swap_nodes(listint_t **list, listint_t *node_one, listint_t *node_two);
 
 /**
  * cocktail_sort_list - a function that sorts a doubly linked list of
@@ -15,7 +15,7 @@ void swap_nodes(listint_t *node_one, listint_t *node_two);
 
 void cocktail_sort_list(listint_t **list)
 {
-	listint_t *start = NULL, *end = NULL;
+	listint_t *start = *list, *end = NULL;
 	listint_t *current;
 	bool swapped = true;
 
@@ -33,11 +33,16 @@ void cocktail_sort_list(listint_t **list)
 			if (current->n > current->next->n)
 			{
 				/* swap function */
-				swap_nodes(current, current->next);
+				swap_nodes(list, current, current->next);
 				swapped = true;
+				if (current->prev == NULL)
+					*list = current;
+				print_list(*list);
 			}
-			current = current->next;
+			else
+				current = current->next;
 		}
+
 		if (!swapped)
 			break;
 
@@ -47,12 +52,15 @@ void cocktail_sort_list(listint_t **list)
 		{
 			if (current->n < current->prev->n)
 			{
-				swap_nodes(current->prev, current);
+				swap_nodes(list, current->prev, current);
 				swapped = true;
+				if (current->prev == NULL)
+					*list = current->prev;
+				print_list(*list);
 			}
-			current = current->prev;
+			else
+				current = current->prev;
 		}
-		print_list(*list);
 		start = current;
 	}
 }
@@ -67,31 +75,31 @@ void cocktail_sort_list(listint_t **list)
  * Return: void
  */
 
-void swap_nodes(listint_t *node_one, listint_t *node_two)
+void swap_nodes(listint_t **list, listint_t *node_one, listint_t *node_two)
 {
-	listint_t *temp_next, *temp_prev;
 
 	if (node_one == node_two)
 		return;
 
-	temp_next = node_one->next;
+	if (node_one->prev != NULL)
+		node_one->prev->next = node_two;
+
+	if (node_two->next != NULL)
+		node_two->next->prev = node_one;
+
 	node_one->next = node_two->next;
-	node_two->next = temp_next;
+	node_two->prev = node_one->prev;
+	node_one->prev = node_two;
+	node_two->next = node_one;
 
 	if (node_one->next != NULL)
 		node_one->next->prev = node_one;
 
-	if (node_two->next != NULL)
-		node_two->next->prev = node_two;
-
-	/* Update previous pointers */
-	temp_prev = node_one->prev;
-	node_one->prev = node_two->prev;
-	node_two->prev = temp_prev;
-
-	if (node_one->prev != NULL)
-		node_one->prev->next = node_one;
-
 	if (node_two->prev != NULL)
 		node_two->prev->next = node_two;
+
+	if (node_one->prev == NULL)
+		*list = node_one;
+	else if (node_two->prev == NULL)
+		*list = node_two;
 }
