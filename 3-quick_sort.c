@@ -1,7 +1,7 @@
 #include "sort.h"
 
-int lomute_part(int *arr, size_t size, size_t low, size_t high);
-void sorting_lomute(int *a, size_t size, size_t low, size_t high);
+int lomute_part(int *arr, size_t size, int low, int high);
+void sorting_lomute(int *a, size_t size, int low, int high);
 
 /**
  * quick_sort - sorts an array of integers
@@ -23,16 +23,16 @@ void quick_sort(int *array, size_t size)
  * @size: The size of the array.
  * @low: the address of the beginning.
  * @high: the address of the ending.
- * Return: sorted array.
+ * Return: address of pivot.
  */
-int lomute_part(int *arr, size_t size, size_t low, size_t high)
+int lomute_part(int *arr, size_t size, int low, int high)
 {
-	int pivot = arr[size - 1];
-	size_t j = low;
-	size_t i;
+	int pivot = arr[high];
+	int j = low;
+	int i;
 	int tmp1, tmp2;
 
-	for (i = 0; i < size; i++)
+	for (i = low; i <= high; i++)
 	{
 		if (arr[i] <= pivot)
 		{
@@ -46,8 +46,8 @@ int lomute_part(int *arr, size_t size, size_t low, size_t high)
 	tmp2 = arr[high];
 	arr[high] = arr[j];
 	arr[j] = tmp2;
+	print_array(arr, size);
 	/**
-	 * print_array(arr, size);
 	 * lomute_part(arr, size, low, j - 1);
 	 * lomute_part(arr, size, j + 1, high);
 	 */
@@ -62,7 +62,7 @@ int lomute_part(int *arr, size_t size, size_t low, size_t high)
  * @high: the address of the ending.
  * Return: nothing.
  */
-void sorting_lomute(int *a, size_t size, size_t low, size_t high)
+void sorting_lomute(int *a, size_t size, int low, int high)
 {
 	int arrs;
 
