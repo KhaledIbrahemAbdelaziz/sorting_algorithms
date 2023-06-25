@@ -45,11 +45,9 @@ int lomute_partition(int arr[], int first, int end)
 		{
 			i++;
 			swap_elements(&arr[i], &arr[j]);
-			print_array(arr, end + 1);
 		}
 	}
 	swap_elements(&arr[i + 1], &arr[end]);
-	print_array(arr, end + 1);
 	return (i + 1);
 }
 
@@ -81,6 +79,7 @@ void sort_quick(int arr[], int first, int end)
 	if (first < end)
 	{
 		pi = lomute_partition(arr, first, end);
+		print_array(arr, end + 1);
 		sort_quick(arr, first, pi - 1);
 		sort_quick(arr, pi + 1, end);
 	}
