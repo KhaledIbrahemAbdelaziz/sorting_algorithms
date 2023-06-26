@@ -30,7 +30,7 @@ void merge_sort(int *array, size_t size)
 
 
 /**
- * merger - frees allocated memory and set the middle of the array
+ * merger - set the middle element of the array
  *
  * @array: array to be sorted
  *
@@ -51,18 +51,16 @@ void merger(int array[], int *temp, int left_start, int right_end)
 	if (left_start >= right_end)
 		return;
 
-	if (left_start < right_end)
-	{
-		middle = (left_start + right_end) / 2;
+	middle = (left_start + right_end) / 2;
 
-		/* first sub array */
-		merger(array, temp, left_start, middle);
+	/* first sub array */
+	merger(array, temp, left_start, middle);
 
-		/* second sub array */
-		merger(array, temp, middle + 1, right_end);
+	/* second sub array */
+	merger(array, temp, middle + 1, right_end);
 
-		top_down_merge(array, temp, left_start, middle, right_end);
-	}
+	top_down_merge(array, temp, left_start, middle, right_end);
+
 }
 
 
