@@ -135,11 +135,9 @@ void print_extra_implementations(int array[], int temp[], int left_start,
 
 void top_down_merge(int array[], int temp[], int left_start, int middle, int right_end)
 {
-	int left_end = middle;
-	int right_start = middle + 1;
-	int size = right_end - left_start + 1;
-	int left = left_start, right = right_start;
-	int index = left_start, i;
+	int left_end = middle, right_start = middle + 1;
+	/*int size = right_end - left_start + 1;*/
+	int left = left_start, right = right_start, index = left_start, i;
 
 	while (left <= left_end && right <= right_end)
 	{
@@ -150,24 +148,26 @@ void top_down_merge(int array[], int temp[], int left_start, int middle, int rig
 		}
 		else
 		{temp[index] = array[right];
-			right++;}
+			right++; }
 		index++;
 	}
 
 	while (left <= left_end)
-	{temp[index] = array[left];
+	{
+		temp[index] = array[left];
 		left++;
-		index++;}
+		index++;
+	}
 	while (right <= right_end)
-	{temp[index] = array[right];
+	{
+		temp[index] = array[right];
 		right++;
-		index++;}
+		index++;
+	}
 
 	print_extra_implementations(array, temp, left_start, middle,
 			right_start, right_end);
 
 	for (i = left_start; i <= right_end; i++)
 		array[i] = temp[i];
-
-	(void) size;
 }
