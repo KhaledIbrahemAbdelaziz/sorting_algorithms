@@ -1,8 +1,6 @@
 #include "sort.h"
 /* header */
 
-void merger(int array[], int *temp, int left_start, int right_end);
-void top_down_merge(int array[], int temp[], int left_start, int middle, int right_end);
 /**
  * merge_sort - a function that sorts an array of integers in ascending
  * order using the Merge sort algorithm
@@ -30,6 +28,21 @@ void merge_sort(int *array, size_t size)
 	free(temp);
 }
 
+
+/**
+ * merger - frees allocated memory and set the middle of the array
+ *
+ * @array: array to be sorted
+ *
+ * @temp: temporary memory
+ *
+ * @left_start: beginning of the left sub array (first element)
+ *
+ * @right_end: end of right sub array (last element)
+ *
+ * Return: void
+ */
+
 void merger(int array[], int *temp, int left_start, int right_end)
 {
 	int middle;
@@ -52,6 +65,22 @@ void merger(int array[], int *temp, int left_start, int right_end)
 	}
 }
 
+
+/**
+ * top_down_merge - implementation of the top down merge algorithm plus
+ * extra checks
+ *
+ * @array: array to be sorted, contains integer elements
+ *
+ * @temp: temporary memory
+ *
+ * @left_start: beginning of the left sub array (first element)
+ *
+ * @middle: element in the middle of the array after the array has been
+ * splited into two parts
+ *
+ * @right_end: end of the right sub array (last element)
+ */
 
 void top_down_merge(int array[], int temp[], int left_start, int middle, int right_end)
 {
