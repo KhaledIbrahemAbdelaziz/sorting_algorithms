@@ -1,9 +1,8 @@
 #include "sort.h"
 /* header */
 
-void merger(int array[], int temp, int left_start, int right_end);
-void top_down_merge(int array[], int temp, int left_start, int middle,
-		int right_end);
+void merger(int array[], int *temp, int left_start, int right_end);
+void top_down_merge(int array[], int temp[], int left_start, int middle, int right_end);
 /**
  * merge_sort - a function that sorts an array of integers in ascending
  * order using the Merge sort algorithm
@@ -24,19 +23,20 @@ void merge_sort(int *array, size_t size)
 
 	/* allocate enough memory */
 	temp = malloc(size * sizeof(int));
-	merger(array, &temp, 0, size + 1);
+	if (temp == NULL)
+		return;
+
+	merger(array, temp, 0, size - 1);
+	free(temp);
 }
 
-void merger(int array[], int **temp, int left_start, int right_end)
+void merger(int array[], int *temp, int left_start, int right_end)
 {
 	int middle;
 
 	/* extra error check */
 	if (left_start >= right_end)
-	{
-		free(temp);
 		return;
-	}
 
 	if (left_start < right_end)
 	{
@@ -53,13 +53,50 @@ void merger(int array[], int **temp, int left_start, int right_end)
 }
 
 
-void top_down_merge(int array[], int temp, int left_start, int middle, int right_end)
+void top_down_merge(int array[], int temp[], int left_start, int middle, int right_end)
 {
 	int left_end = middle;
 	int right_start = middle + 1;
-	int size = right_end - left_start;
+	int size = right_end - left_start + 1;
 
+	int left = left_start;
+	int right = right_start;
+	int index = left_start;
+	int i;
 
-	printf("%d\n", size);
+	while (left <= left_end && right <= right_end)
+	{
+		if (array[left] <= array[right])
+		{
+			temp[index] = array[left];
+			left++;
+		}
+		else
+		{
+			temp[index] = array[right];
+			right++;
+		}
+		index++;
+	}
+
+	while (left <= left_end)
+	{
+		temp[index] = array[left];
+		left++;
+		index++;
+	}
+	while (right <= right_end)
+	{
+		temp[index] = array[right];
+		right++;
+		index++;
+	}
+
+	for (i = left_start; i <= right_end; i++)
+	{
+		array[i] = temp[i];
+
+		print_array(array, size);
+	}
 }
 
