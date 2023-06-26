@@ -138,11 +138,8 @@ void top_down_merge(int array[], int temp[], int left_start, int middle, int rig
 	int left_end = middle;
 	int right_start = middle + 1;
 	int size = right_end - left_start + 1;
-
-	int left = left_start;
-	int right = right_start;
-	int index = left_start;
-	int i;
+	int left = left_start, right = right_start;
+	int index = left_start, i;
 
 	while (left <= left_end && right <= right_end)
 	{
