@@ -69,6 +69,8 @@ void cocktail_sort_list(listint_t **list)
 /**
  * swap_nodes - swap two nodes
  *
+ * @list: double pointer to the list
+ *
  * @node_one: node to be swapped
  *
  * @node_two: node to be swapped
