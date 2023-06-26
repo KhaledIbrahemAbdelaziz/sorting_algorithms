@@ -31,10 +31,18 @@ void selection_sort(int *array, size_t size);
 void quick_sort(int *array, size_t size);
 void shell_sort(int *array, size_t size);
 void cocktail_sort_list(listint_t **list);
+void merge_sort(int *array, size_t size);
 
 /* lomuto functions */
 void lomuto_swap(int array[], int a, int b);
 int lomuto_partition(int array[], int first, int end);
 void lomuto_sort(int array[], int first, int end);
+
+/* merge sort functions */
+void merger(int array[], int *temp, int left_start, int right_end);
+void top_down_merge(int array[], int temp[], int left_start,
+		int middle, int right_end);
+
+
 
 #endif /* SORT_H */
