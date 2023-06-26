@@ -133,7 +133,8 @@ void print_extra_implementations(int array[], int temp[], int left_start,
  * @right_end: end of the right sub array (last element)
  */
 
-void top_down_merge(int array[], int temp[], int left_start, int middle, int right_end)
+void top_down_merge(int array[], int temp[], int left_start,
+		int middle, int right_end)
 {
 	int left_end = middle, right_start = middle + 1;
 	/*int size = right_end - left_start + 1;*/
@@ -147,8 +148,10 @@ void top_down_merge(int array[], int temp[], int left_start, int middle, int rig
 			left++;
 		}
 		else
-		{temp[index] = array[right];
-			right++; }
+		{
+			temp[index] = array[right];
+			right++;
+		}
 		index++;
 	}
 
