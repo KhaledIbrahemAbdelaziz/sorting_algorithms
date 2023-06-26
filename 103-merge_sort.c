@@ -149,27 +149,23 @@ void top_down_merge(int array[], int temp[], int left_start, int middle, int rig
 			left++;
 		}
 		else
-		{
-			temp[index] = array[right];
-			right++;
-		}
+		{temp[index] = array[right];
+			right++;}
 		index++;
 	}
 
 	while (left <= left_end)
-	{
-		temp[index] = array[left];
+	{temp[index] = array[left];
 		left++;
-		index++;
-	}
+		index++;}
 	while (right <= right_end)
-	{
-		temp[index] = array[right];
+	{temp[index] = array[right];
 		right++;
-		index++;
-	}
+		index++;}
+
 	print_extra_implementations(array, temp, left_start, middle,
 			right_start, right_end);
+
 	for (i = left_start; i <= right_end; i++)
 		array[i] = temp[i];
 
