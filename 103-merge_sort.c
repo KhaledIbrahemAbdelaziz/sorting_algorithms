@@ -65,6 +65,59 @@ void merger(int array[], int *temp, int left_start, int right_end)
 
 
 /**
+ * print_extra_implementations - prints the merging, left, right nd done
+ *
+ * @array: array containing elements
+ *
+ * @temp: temporary memory
+ *
+ * @left_start: start of left sub array
+ *
+ * @middle: middle element
+ *
+ * @right_start: start of right sub array
+ *
+ * @right_end: end of right sub array
+ *
+ * Return: void
+ */
+
+void print_extra_implementations(int array[], int temp[], int left_start,
+		int middle, int right_start, int right_end)
+{
+	int i;
+
+	printf("Merging...\n");
+	printf("[left]: ");
+	for (i = left_start; i <= middle; i++)
+	{
+		printf("%d", array[i]);
+		if (i != middle)
+			printf(", ");
+	}
+	printf("\n");
+
+	printf("[right]: ");
+	for (i = right_start; i <= right_end; i++)
+	{
+		printf("%d", array[i]);
+		if (i != right_end)
+			printf(", ");
+	}
+	printf("\n");
+
+	printf("[Done]: ");
+	for (i = left_start; i <= right_end; i++)
+	{
+		printf("%d", temp[i]);
+			if (i != right_end)
+				printf(", ");
+	}
+	printf("\n");
+}
+
+
+/**
  * top_down_merge - implementation of the top down merge algorithm plus
  * extra checks
  *
@@ -118,34 +171,8 @@ void top_down_merge(int array[], int temp[], int left_start, int middle, int rig
 		right++;
 		index++;
 	}
-	printf("Merging...\n");
-	printf("[left]: ");
-	for (i = left_start; i <= middle; i++)
-	{
-		printf("%d", array[i]);
-		if (i != middle)
-			printf(", ");
-	}
-	printf("\n");
-
-	printf("[right]: ");
-	for (i = right_start; i <= right_end; i++)
-	{
-		printf("%d", array[i]);
-		if (i != right_end)
-			printf(", ");
-	}
-	printf("\n");
-
-	printf("[Done]: ");
-	for (i = left_start; i <= right_end; i++)
-	{
-		printf("%d", temp[i]);
-		if (i != right_end)
-			printf(", ");
-	}
-	printf("\n");
-
+	print_extra_implementations(array, temp, left_start, middle,
+			right_start, right_end);
 	for (i = left_start; i <= right_end; i++)
 		array[i] = temp[i];
 
