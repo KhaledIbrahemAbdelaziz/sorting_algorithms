@@ -35,8 +35,10 @@ void cocktail_sort_list(listint_t **list)
 				/* swap function */
 				swap_nodes(list, current, current->next);
 				swapped = true;
-				if (current->prev == NULL)
-					*list = current;
+				/**
+				 * if (current->prev == NULL)
+				 * *list = current;
+				 */
 				print_list(*list);
 			}
 			else
