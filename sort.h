@@ -41,8 +41,10 @@ void lomuto_sort(int array[], int first, int end);
 
 /* merge sort functions */
 void merger(int array[], int *temp, int left_start, int right_end);
+
 void top_down_merge(int array[], int temp[], int left_start,
 		int middle, int right_end);
+
 void print_extra_implementations(int array[], int temp[], int left_start,
 		int middle, int right_start, int right_end);
 
