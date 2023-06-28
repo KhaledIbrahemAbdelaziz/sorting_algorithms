@@ -1,6 +1,7 @@
 #include "sort.h"
 /* header */
-
+void print_all(int left, int *l_temp, int right, int *r_temp,
+		int left_start, int right_end, int *array, int *temp);
 /**
  * merge_sort - a function that sorts an array of integers in ascending
  * order using the Merge sort algorithm
@@ -51,7 +52,7 @@ void merger(int array[], int *temp, int left_start, int right_end)
 	if (left_start >= right_end)
 		return;
 
-	middle = (left_start + right_end) / 2;
+	middle = ((left_start + right_end - 1) / 2);
 
 	/* first sub array */
 	merger(array, temp, left_start, middle);
@@ -63,59 +64,38 @@ void merger(int array[], int *temp, int left_start, int right_end)
 
 }
 
-
-/**
- * print_extra_implementations - prints the merging, left, right nd done
- *
- * @array: array containing elements
- *
- * @temp: temporary memory
- *
- * @left_start: start of left sub array
- *
- * @middle: middle element
- *
- * @right_start: start of right sub array
- *
- * @right_end: end of right sub array
- *
- * Return: void
- */
-
-void print_extra_implementations(int array[], int temp[], int left_start,
-		int middle, int right_start, int right_end)
+void print_all(int left, int *l_temp, int right, int *r_temp,
+		int left_start, int right_end, int *array, int *temp)
 {
-	int i;
+	int i, j;
 
-	printf("Merging...\n");
 	printf("[left]: ");
-	for (i = left_start; i <= middle; i++)
+	for (i = 0; i < left; i++)
 	{
-		printf("%d", array[i]);
-		if (i != middle)
+		if (i == 0)
+			printf("%d", r_temp[i]);
+		else
+			printf(", %d", r_temp[i]);
+	}
+	printf("\n[right]: ");
+	for (i = 0; i < right; i++)
+	{
+		if (i == 0)
+			printf("%d", l_temp[i]);
+		else
+			printf(", %d", l_temp[i]);
+	}
+	printf("\n[Done]: ");
+	for (j = left_start; j <= right_end; j++)
+	{
+		array[j] = temp[j - left_start];
+		printf("%d", array[j]);
+		if (j != right_end)
 			printf(", ");
+		else
+			printf("\n");
 	}
-	printf("\n");
-
-	printf("[right]: ");
-	for (i = right_start; i <= right_end; i++)
-	{
-		printf("%d", array[i]);
-		if (i != right_end)
-			printf(", ");
-	}
-	printf("\n");
-
-	printf("[Done]: ");
-	for (i = left_start; i <= right_end; i++)
-	{
-		printf("%d", temp[i]);
-			if (i != right_end)
-				printf(", ");
-	}
-	printf("\n");
 }
-
 
 /**
  * top_down_merge - implementation of the top down merge algorithm plus
@@ -133,44 +113,50 @@ void print_extra_implementations(int array[], int temp[], int left_start,
  * @right_end: end of the right sub array (last element)
  */
 
-void top_down_merge(int array[], int temp[], int left_start,
+void top_down_merge(int *array, int *temp, int left_start,
 		int middle, int right_end)
 {
-	int left_end = middle, right_start = middle + 1;
-	/*int size = right_end - left_start + 1;*/
-	int left = left_start, right = right_start, index = left_start, i;
+	int index, r_start, left = 0, right = 0, key = 0;
+	int l_temp[1024], r_temp[1024];
 
-	while (left <= left_end && right <= right_end)
+	printf("Merging...\n");
+	index = left_start, r_start = middle + 1;
+	while (index <= middle && r_start <= right_end)
 	{
-		if (array[left] <= array[right])
+		if (array[index] <= array[r_start])
 		{
-			temp[index] = array[left];
+			temp[key] = array[index];
+			l_temp[left] = array[index];
+			key++;
+			index++;
 			left++;
 		}
 		else
 		{
-			temp[index] = array[right];
+			temp[key] = array[r_start];
+			r_temp[right] = array[r_start];
+			key++;
+			r_start++;
 			right++;
 		}
-		index++;
 	}
 
-	while (left <= left_end)
+	while (index <= middle)
 	{
-		temp[index] = array[left];
+		temp[key] = array[index];
+		l_temp[left] = array[index];
+		key++;
+		index++;
 		left++;
-		index++;
 	}
-	while (right <= right_end)
+	while (r_start <= right_end)
 	{
-		temp[index] = array[right];
+		temp[key] = array[r_start];
+		r_temp[right] = array[r_start];
+		key++;
+		r_start++;
 		right++;
-		index++;
 	}
-
-	print_extra_implementations(array, temp, left_start, middle,
-			right_start, right_end);
-
-	for (i = left_start; i <= right_end; i++)
-		array[i] = temp[i];
+	print_all(left, l_temp, right, r_temp, left_start, right_end,
+			array, temp);
 }
