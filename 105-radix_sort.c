@@ -31,7 +31,7 @@ int max_integer(int *array, size_t size)
 
 
 /**
- * raidx_sort - a function that sorts an array of integers in ascending
+ * radix_sort - a function that sorts an array of integers in ascending
  * order using the Radix sort algorithm
  *
  * @array: array to be sorted, contains integer
@@ -83,4 +83,3 @@ void radix_sort(int *array, size_t size)
 	}
 	free(output);
 }
-
