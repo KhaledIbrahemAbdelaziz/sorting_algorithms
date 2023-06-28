@@ -102,7 +102,7 @@ void swap_nodes(listint_t **list, listint_t *node_one, listint_t *node_two)
 		node_two->prev->next = node_two;
 
 	if (node_one->prev == NULL)
-		*list = node_one->prev;
+		*list = node_one;
 	else if (node_two->prev == NULL)
 		*list = node_two;
 }
