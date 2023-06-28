@@ -2,8 +2,6 @@
 #include <stdbool.h>
 /* header */
 
-void swap_nodes(listint_t **list, listint_t *node_one, listint_t *node_two);
-
 /**
  * cocktail_sort_list - a function that sorts a doubly linked list of
  * integers in ascending order using the Cocktail shaker sort algorithm
