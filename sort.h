@@ -54,6 +54,10 @@ void top_down_merge(int array[], int temp[], int left_start,
 void print_extra_implementations(int array[], int temp[], int left_start,
 		int middle, int right_start, int right_end);
 
+/* heap sort functions */
+void heapity(int *arr, size_t size, int i);
+void buildtree(int *a, size_t size);
+
 /* radix sort functions */
 int max_integer(int *array, size_t size);
 
