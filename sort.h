@@ -34,6 +34,7 @@ void cocktail_sort_list(listint_t **list);
 void counting_sort(int *array, size_t size);
 void heap_sort(int *array, size_t size);
 void merge_sort(int *array, size_t size);
+void radix_sort(int *array, size_t size);
 
 /* lomuto functions */
 void lomuto_swap(int array[], int a, int b);
@@ -48,6 +49,9 @@ void top_down_merge(int array[], int temp[], int left_start,
 
 void print_extra_implementations(int array[], int temp[], int left_start,
 		int middle, int right_start, int right_end);
+
+/* radix sort functions */
+int max_integer(int *array, size_t size);
 
 
 #endif /* SORT_H */
