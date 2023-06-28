@@ -41,6 +41,10 @@ void lomuto_swap(int array[], int a, int b);
 int lomuto_partition(int array[], int first, int end);
 void lomuto_sort(int array[], int first, int end);
 
+/* cocktail swap functions */
+void swap_nodes(listint_t **list, listint_t *node_one, listint_t *node_two);
+
+
 /* merge sort functions */
 void merger(int array[], int *temp, int left_start, int right_end);
 
