@@ -44,7 +44,7 @@ int max_integer(int *array, size_t size)
 void radix_sort(int *array, size_t size)
 {
 	int *output, max, digit_place = 1, count[1024] = {0};
-	int n = size - 0, i;
+	int n = size, i;
 
 	if (array == NULL || size < 2)
 		return;
@@ -57,6 +57,10 @@ void radix_sort(int *array, size_t size)
 
 	while (max / digit_place > 0)
 	{
+		/* resets count array to 0*/
+		for (i = 0; i < 10; i++)
+			count[i] = 0;
+
 		for (i = 0; i < n; i++)
 			count[(array[i] / digit_place) % 10]++;
 
