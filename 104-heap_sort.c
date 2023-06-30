@@ -39,9 +39,9 @@ void heapity(int *arr, size_t size, int i)
 	int max = i;
 	int tmp;
 
-	if (arr[left] > arr[max])
+	if (left < (int)size && arr[left] > arr[max])
 		max = left;
-	if (arr[right] > arr[max])
+	if (right < (int)size && arr[right] > arr[max])
 		max = right;
 	if (max != i)
 	{
@@ -49,8 +49,8 @@ void heapity(int *arr, size_t size, int i)
 		arr[i] = arr[max];
 		arr[max] = tmp;
 		print_array(arr, size);
+		heapity(arr, size, max);
 	}
-	heapity(arr, size, max);
 }
 
 /**
