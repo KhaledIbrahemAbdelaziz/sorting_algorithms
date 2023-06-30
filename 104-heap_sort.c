@@ -15,7 +15,7 @@ void heap_sort(int *array, size_t size)
 	int i, tmp;
 
 	buildtree(array, size);
-	for (i = ((int)size - 1); i >= 0; i++)
+	for (i = ((int)size - 1); i >= 0; i--)
 	{
 		tmp = array[0];
 		array[0] = array[i];
@@ -49,8 +49,9 @@ void heapity(int *arr, size_t size, int i)
 		arr[i] = arr[max];
 		arr[max] = tmp;
 		print_array(arr, size);
-		heapity(arr, size, max);
+		/*heapity(arr, size, max);*/
 	}
+	heapity(arr, size, max);
 }
 
 /**
