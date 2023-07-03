@@ -49,9 +49,10 @@ void heapity(int *array, size_t size, int i)
 	if (max_int != i)
 	{
 		swapper(&array[i], &array[max_int]);
-		print_array(array, size);
 		heapity(array, size, max_int);
+		print_array(array, size);
 	}
+
 }
 
 
