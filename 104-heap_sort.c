@@ -1,11 +1,11 @@
 #include "sort.h"
 
 void heapity(int *arr, size_t size, int i);
-void swaper(int *a, int *b);
+void swapper(int *a, int *b);
 
 
 /**
- * swaper - swaps two elements of an array
+ * swapper - swaps two elements of an array
  *
  * @a: first element
  *
