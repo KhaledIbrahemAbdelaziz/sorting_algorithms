@@ -72,6 +72,7 @@ void heap_sort(int *array, size_t size)
 	for (i = size - 1; i >= 0; i--)
 	{
 		swapper(&array[0], &array[i]);
+		print_array(array, size);
 		heapity(array, i, 0);
 	}
 }
