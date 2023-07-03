@@ -1,6 +1,6 @@
 #include "sort.h"
 
-void heapity(int *arr, size_t size, int i);
+void heapify(int *arr, size_t size, int i);
 void swapper(int *a, int *b);
 
 
@@ -23,7 +23,7 @@ void swapper(int *a, int *b)
 
 
 /**
- * heapity - a subtree rooted with node i
+ * heapify - a subtree rooted with node i
  *
  * @array: array containing elements
  *
@@ -34,7 +34,7 @@ void swapper(int *a, int *b)
  * Return: void
  */
 
-void heapity(int *array, size_t size, int i)
+void heapify(int *array, size_t size, int i)
 {
 	int max_int = i;
 	size_t left = 2 * i + 1;
@@ -49,7 +49,7 @@ void heapity(int *array, size_t size, int i)
 	if (max_int != i)
 	{
 		swapper(&array[i], &array[max_int]);
-		heapity(array, size, max_int);
+		heapify(array, size, max_int);
 		print_array(array, size);
 	}
 
@@ -68,12 +68,12 @@ void heap_sort(int *array, size_t size)
 	int i;
 
 	for (i = (size / 2) - 1; i >= 0; i--)
-		heapity(array, size, i);
+		heapify(array, size, i);
 
 	for (i = size - 1; i >= 0; i--)
 	{
 		swapper(&array[0], &array[i]);
 		print_array(array, size);
-		heapity(array, i, 0);
+		heapify(array, i, 0);
 	}
 }
