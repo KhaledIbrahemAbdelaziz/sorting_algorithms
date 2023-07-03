@@ -1,7 +1,59 @@
 #include "sort.h"
 
 void heapity(int *arr, size_t size, int i);
-void buildtree(int *a, size_t size);
+void swaper(int *a, int *b);
+
+
+/**
+ * swaper - swaps two elements of an array
+ *
+ * @a: first element
+ *
+ * @b: second e;ement
+ *
+ * Return: void
+ */
+
+void swapper(int *a, int *b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+
+/**
+ * heapity - a subtree rooted with node i
+ *
+ * @array: array containing elements
+ *
+ * @size: size of array
+ *
+ * @i: index in array
+ *
+ * Return: void
+ */
+
+void heapity(int *array, size_t size, int i)
+{
+	int max_int = i;
+	size_t left = 2 * i + 1;
+	size_t right = 2 * i + 2;
+
+	if ((left < size) && (array[left] > array[max_int]))
+		max_int = left;
+
+	if ((right < size) && (array[right] > array[max_int]))
+		max_int = right;
+
+	if (max_int != i)
+	{
+		swapper(&array[i], &array[max_int]);
+		print_array(array, size);
+		heapity(array, size, max_int);
+	}
+}
+
 
 /**
  * heap_sort - sorts an array of integers
@@ -12,58 +64,14 @@ void buildtree(int *a, size_t size);
  */
 void heap_sort(int *array, size_t size)
 {
-	int i, tmp;
-
-	buildtree(array, size);
-	for (i = ((int)size - 1); i >= 0; i--)
-	{
-		tmp = array[0];
-		array[0] = array[i];
-		array[i] = tmp;
-		print_array(array, size);
-		heapity(array, i, 0);
-	}
-}
-
-/**
- * heapity - help to parts left and right.
- * @arr: the array.
- * @size: the size of the array.
- * @i: the position of the element in the array.
- * Return: nothing.
- */
-void heapity(int *arr, size_t size, int i)
-{
-	int left = (2 * i) + 1;
-	int right = (2 * i) + 2;
-	int max = i;
-	int tmp;
-
-	if (left < (int)size && arr[left] > arr[max])
-		max = left;
-	if (right < (int)size && arr[right] > arr[max])
-		max = right;
-	if (max != i)
-	{
-		tmp = arr[i];
-		arr[i] = arr[max];
-		arr[max] = tmp;
-		print_array(arr, size);
-		/*heapity(arr, size, max);*/
-	}
-	heapity(arr, size, max);
-}
-
-/**
- * buildtree - build a tree from array.
- * @a: the array.
- * @size: the size of the array.
- * Return: nothing.
- */
-void buildtree(int *a, size_t size)
-{
 	int i;
 
-	for (i = (((int)size / 2) - 1); i >= 0; i--)
-		heapity(a, size, i);
+	for (i = (size / 2) - 1; i >= 0; i--)
+		heapity(array, size, i);
+
+	for (i = size - 1; i >= 0; i--)
+	{
+		swapper(&array[0], &array[i]);
+		heapity(array, i, 0);
+	}
 }
