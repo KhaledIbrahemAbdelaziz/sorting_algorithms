@@ -35,6 +35,7 @@ void counting_sort(int *array, size_t size);
 void heap_sort(int *array, size_t size);
 void merge_sort(int *array, size_t size);
 void radix_sort(int *array, size_t size);
+void bitonic_sort(int *array, size_t size);
 
 /* lomuto functions */
 void lomuto_swap(int array[], int a, int b);
@@ -61,5 +62,9 @@ void swapper(int *a, int *b);
 /* radix sort functions */
 int max_integer(int *array, size_t size);
 
+/* bitonic sort funtions */
+void b_sort(int *array, int low, int count, int dir, size_t size);
+void b_merge(int *array, int low, int count, int dir, size_t size);
+void swapint(int *l, int *r);
 
 #endif /* SORT_H */
