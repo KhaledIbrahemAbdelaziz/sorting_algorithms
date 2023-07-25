@@ -36,6 +36,7 @@ void heap_sort(int *array, size_t size);
 void merge_sort(int *array, size_t size);
 void radix_sort(int *array, size_t size);
 void bitonic_sort(int *array, size_t size);
+void quick_sort_hoare(int *array, size_t size);
 
 /* lomuto functions */
 void lomuto_swap(int array[], int a, int b);
@@ -66,5 +67,10 @@ int max_integer(int *array, size_t size);
 void b_sort(int *array, int low, int count, int dir, size_t size);
 void b_merge(int *array, int low, int count, int dir, size_t size);
 void swapint(int *l, int *r);
+
+/* quick sort hoare functions */
+void _quick_sort(int *array, ssize_t lo, ssize_t hi, size_t size);
+size_t partition(int *array, ssize_t lo, ssize_t hi, size_t size);
+void swap_values(int **array, ssize_t i1, ssize_t i2);
 
 #endif /* SORT_H */
